@@ -91,20 +91,6 @@ const ProjectCard = ({ title, description, tags }) => (
   </div>
 );
 
-const SkillBadge = ({ name, level }) => (
-  <div className="bg-black border-2 border-green-500 border-opacity-30 p-4 rounded-xl skill-badge transition-all duration-300">
-    <Text variant="body" className="font-semibold mb-2 text-green-400">
-      {name}
-    </Text>
-    <div className="w-full bg-gray-800 rounded-full h-2 overflow-hidden">
-      <div
-        className="bg-gradient-to-r from-green-500 to-emerald-400 h-2 rounded-full transition-all duration-1000 skill-bar"
-        style={{ width: `${level}%` }}
-      />
-    </div>
-  </div>
-);
-
 const TimelineItem = ({
   year,
   title,
@@ -219,7 +205,14 @@ const Header = ({ scrolled }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["home", "about", "projects", "skills", "contact"];
+      const sections = [
+        "home",
+        "about",
+        "education",
+        "projects",
+        "skills",
+        "contact",
+      ];
       let current = "home";
 
       sections.forEach((id) => {
@@ -250,19 +243,19 @@ const Header = ({ scrolled }) => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ${
         scrolled ? "header-scrolled" : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto px-6">
+      <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="text-2xl font-bold text-green-400 logo-glow">
+          <div className="text-xl sm:text-2xl font-bold text-green-400 logo-glow flex-shrink-0">
             Portfolio
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden md:flex space-x-4 lg:space-x-6 xl:space-x-8 flex-1 justify-center max-w-2xl">
             <NavLink
               href="#home"
               onClick={(e) => {
@@ -274,14 +267,14 @@ const Header = ({ scrolled }) => {
               Home
             </NavLink>
             <NavLink
-              href="#about"
+              href="#education"
               onClick={(e) => {
                 e.preventDefault();
-                scrollToSection("about");
+                scrollToSection("education");
               }}
-              isActive={activeSection === "about"}
+              isActive={activeSection === "education"}
             >
-              About
+              Education
             </NavLink>
             <NavLink
               href="#projects"
@@ -317,7 +310,7 @@ const Header = ({ scrolled }) => {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-green-400 hover:text-green-300 transition-colors"
+            className="md:hidden text-green-400 hover:text-green-300 transition-colors flex-shrink-0"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -326,8 +319,8 @@ const Header = ({ scrolled }) => {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="md:hidden absolute top-16 left-0 right-0 bg-black border-t border-green-500 border-opacity-30">
-            <nav className="flex flex-col space-y-4 p-6">
+          <div className="md:hidden absolute top-16 left-0 right-0 w-full bg-black border-t border-green-500 border-opacity-30 shadow-lg z-40">
+            <nav className="flex flex-col space-y-3 p-4">
               <NavLink
                 href="#home"
                 onClick={(e) => {
@@ -339,14 +332,14 @@ const Header = ({ scrolled }) => {
                 Home
               </NavLink>
               <NavLink
-                href="#about"
+                href="#education"
                 onClick={(e) => {
                   e.preventDefault();
-                  scrollToSection("about");
+                  scrollToSection("education");
                 }}
-                isActive={activeSection === "about"}
+                isActive={activeSection === "education"}
               >
-                About
+                Education
               </NavLink>
               <NavLink
                 href="#projects"
@@ -386,7 +379,7 @@ const Header = ({ scrolled }) => {
   );
 };
 
-const HeroSection = ({ scrollY }) => {
+const HeroSection = ({ scrollY, scrollToSection }) => {
   const [text, setText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
@@ -455,22 +448,30 @@ const HeroSection = ({ scrollY }) => {
               </span>
             </div>
             <Text variant="body" className="mb-8 max-w-xl">
-              I'm a web Designer with extensive experience for over 3 years. My
-              expertise is to create and website design, Frontend design, and
-              many more...
+              I am a web designer with over 3 years of extensive experience. My
+              expertise includes website creation and design, front-end and
+              back-end design, and much more...
             </Text>
             <div className="flex gap-4 mb-8">
-              <a href="#" className="social-icon-circle">
-                <Github size={20} />
+              <a
+                href="https://github.com/HilmanShinichi"
+                className="social-icon-circle"
+              >
+                <Github size={20} color="green" />
               </a>
-              <a href="#" className="social-icon-circle">
-                <Linkedin size={20} />
+              <a
+                href="https://www.linkedin.com/in/hilman-septiana/"
+                className="social-icon-circle"
+              >
+                <Linkedin size={20} color="green" />
               </a>
-              <a href="#" className="social-icon-circle">
-                <Mail size={20} />
+              <a
+                href="mailto:hilman_septiana@rocketmail.com"
+                className="social-icon-circle"
+              >
+                <Mail size={20} color="green" />
               </a>
             </div>
-            <Button variant="primary">More About Me</Button>
           </div>
 
           {/* Right Side - Photo */}
@@ -479,17 +480,11 @@ const HeroSection = ({ scrollY }) => {
               <div className="profile-photo-ring"></div>
               <div className="profile-photo-container">
                 <div className="profile-photo-placeholder">
-                  <svg
-                    className="w-full h-full text-gray-600"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
+                  <img
+                    src="/src/assets/images/profile.png"
+                    alt="Profile"
+                    className="object-cover w-full h-full"
+                  />
                 </div>
               </div>
             </div>
@@ -504,12 +499,12 @@ const HeroSection = ({ scrollY }) => {
   );
 };
 
-const AboutSection = ({ scrollY }) => {
+const EducationSection = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      const section = document.getElementById("about");
+      const section = document.getElementById("education");
       if (section) {
         const rect = section.getBoundingClientRect();
         const isInView = rect.top < window.innerHeight * 0.75;
@@ -522,76 +517,97 @@ const AboutSection = ({ scrollY }) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const translateX = Math.min((scrollY - 500) * 0.1, 0);
+  const educationHistory = [
+    {
+      year: "2017 - 2021",
+      degree: "Bachelor of Computer Science",
+      university: "Universitas Panca Sakti Bekasi",
+      location: "Bekasi, Indonesia",
+      gpa: "3.25 / 4.00",
+      achievements: ["Member of Computer Science Student Association"],
+      description:
+        "Focused on Software Engineering and Web Development. Completed capstone project on developing a scalable platform using microservices architecture.",
+    },
+  ];
 
   return (
-    <section id="about" className="py-20 bg-gray-900 relative overflow-hidden">
-      <div
-        className={`container mx-auto px-6 transition-all duration-1000 ${
-          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
-        }`}
-        style={{ transform: `translateX(${translateX}px)` }}
-      >
-        <Text variant="h2" className="text-center mb-12">
-          About Me
+    <section id="education" className="py-20 bg-black">
+      <div className="container mx-auto px-6">
+        <Text
+          variant="h2"
+          className={`text-center mb-12 transition-all duration-1000 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
+          }`}
+        >
+          Education History
         </Text>
 
-        <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-          <div
-            className={`relative transition-all duration-1000 delay-200 ${
-              isVisible
-                ? "opacity-100 translate-x-0"
-                : "opacity-0 -translate-x-20"
-            }`}
-          >
-            <div className="w-full h-96 bg-gradient-to-br from-green-600 to-emerald-700 rounded-2xl about-box-1" />
-            <div className="absolute -bottom-6 -right-6 w-full h-96 bg-gradient-to-br from-emerald-600 to-green-700 rounded-2xl opacity-50 about-box-2" />
-          </div>
+        <div className="max-w-5xl mx-auto space-y-8">
+          {educationHistory.map((edu, idx) => (
+            <div
+              key={idx}
+              className={`transition-all duration-1000 ${
+                isVisible
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-20"
+              }`}
+              style={{ transitionDelay: `${idx * 200}ms` }}
+            >
+              <div className="bg-gray-900 border-2 border-green-500 border-opacity-30 rounded-2xl p-8 education-card hover:border-opacity-60 transition-all duration-300">
+                <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
+                  <div className="flex-1">
+                    <Text variant="h3" className="mb-2">
+                      {edu.degree}
+                    </Text>
+                    <div className="flex items-center gap-2 mb-2">
+                      <Briefcase size={18} className="text-green-400" />
+                      <Text
+                        variant="body"
+                        className="text-green-400 font-semibold"
+                      >
+                        {edu.university}
+                      </Text>
+                    </div>
+                    <Text variant="small" className="text-gray-400">
+                      {edu.location}
+                    </Text>
+                  </div>
+                  <div className="mt-4 md:mt-0 md:text-right">
+                    <span className="inline-block px-4 py-2 bg-green-500 bg-opacity-20 text-green-400 border border-green-500 border-opacity-50 rounded-lg font-semibold mb-2">
+                      {edu.year}
+                    </span>
+                    <div className="text-green-300 font-semibold">
+                      GPA: {edu.gpa}
+                    </div>
+                  </div>
+                </div>
 
-          <div
-            className={`transition-all duration-1000 delay-400 ${
-              isVisible
-                ? "opacity-100 translate-x-0"
-                : "opacity-0 translate-x-20"
-            }`}
-          >
-            <Text variant="body" className="mb-4">
-              I'm a passionate developer with over 5 years of experience
-              creating beautiful, functional, and user-friendly digital
-              experiences.
-            </Text>
-            <Text variant="body" className="mb-4">
-              My expertise spans across modern web technologies, with a focus on
-              React, Node.js, and cloud architecture. I believe in writing
-              clean, maintainable code and creating intuitive user interfaces.
-            </Text>
-            <Text variant="body" className="mb-6">
-              When I'm not coding, you can find me exploring new technologies,
-              contributing to open-source projects, or enjoying a good cup of
-              coffee.
-            </Text>
+                <Text variant="body" className="mb-4 text-gray-300">
+                  {edu.description}
+                </Text>
 
-            <div className="flex gap-4">
-              <a
-                href="#"
-                className="p-3 bg-black border-2 border-green-500 border-opacity-30 rounded-lg hover:bg-green-500 hover:bg-opacity-10 transition-all social-icon"
-              >
-                <Github size={24} className="text-green-400" />
-              </a>
-              <a
-                href="#"
-                className="p-3 bg-black border-2 border-green-500 border-opacity-30 rounded-lg hover:bg-green-500 hover:bg-opacity-10 transition-all social-icon"
-              >
-                <Linkedin size={24} className="text-green-400" />
-              </a>
-              <a
-                href="#"
-                className="p-3 bg-black border-2 border-green-500 border-opacity-30 rounded-lg hover:bg-green-500 hover:bg-opacity-10 transition-all social-icon"
-              >
-                <Mail size={24} className="text-green-400" />
-              </a>
+                <div>
+                  <Text
+                    variant="small"
+                    className="text-gray-400 mb-3 font-medium"
+                  >
+                    Achievements & Activities:
+                  </Text>
+                  <ul className="space-y-2">
+                    {edu.achievements.map((achievement, i) => (
+                      <li
+                        key={i}
+                        className="flex items-start gap-2 text-gray-300"
+                      >
+                        <span className="text-green-400 mt-1">✓</span>
+                        <span>{achievement}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>
@@ -892,20 +908,39 @@ const App = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const scrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <div className="font-sans bg-black">
       <Header scrolled={scrolled} />
-      <HeroSection scrollY={scrollY} />
-      <AboutSection scrollY={scrollY} />
+      <HeroSection scrollY={scrollY} scrollToSection={scrollToSection} />
       <ProjectsSection />
       <ExpertiseSection />
+      <EducationSection />
       <ContactSection />
 
       <style>{`
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+        
         body {
           background-color: #000;
           margin: 0;
           padding: 0;
+          padding-top: 0;
+        }
+        
+        /* Ensure sections don't get hidden behind fixed header */
+        section {
+          scroll-margin-top: 80px;
         }
         
         /* Animated Blobs */
@@ -985,6 +1020,22 @@ const App = () => {
           filter: drop-shadow(0 0 8px rgba(34, 197, 94, 0.8));
         }
         
+        /* Navigation Responsive */
+        @media (max-width: 768px) {
+          .nav-link-glow {
+            font-size: 1rem;
+            padding: 0.5rem 0;
+            display: block;
+            width: 100%;
+          }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1024px) {
+          .nav-link-glow {
+            font-size: 0.875rem;
+          }
+        }
+        
         /* Navigation Active Underline */
         .nav-underline {
           animation: slideIn 0.3s ease-out;
@@ -1024,14 +1075,13 @@ const App = () => {
           box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
         }
         
-        /* About Boxes */
-        .about-box-1 {
-          box-shadow: 0 0 30px rgba(34, 197, 94, 0.4);
+        /* Ensure header stays on top and full width */
+        header {
+          width: 100vw !important;
+          left: 0 !important;
+          right: 0 !important;
         }
         
-        .about-box-2 {
-          box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
-        }
         
         /* Social Icons */
         .social-icon:hover {
@@ -1104,6 +1154,17 @@ const App = () => {
         
         .timeline-card.blue:hover {
           box-shadow: 0 0 25px rgba(59, 130, 246, 0.4);
+          transform: translateY(-5px);
+        }
+
+        /* Education Cards */
+        .education-card {
+          box-shadow: 0 0 15px rgba(34, 197, 94, 0.2);
+          transition: all 0.3s ease;
+        }
+        
+        .education-card:hover {
+          box-shadow: 0 0 30px rgba(34, 197, 94, 0.4);
           transform: translateY(-5px);
         }
 
