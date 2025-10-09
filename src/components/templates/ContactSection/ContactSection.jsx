@@ -62,19 +62,19 @@ const ContactSection = () => {
           }`}
         >
           <a
-            href="#"
+            href="https://github.com/HilmanShinichi"
             className="hover:scale-110 transition-transform text-green-400 contact-icon"
           >
             <Github size={28} />
           </a>
           <a
-            href="#"
+            href="https://www.linkedin.com/in/hilman-septiana/"
             className="hover:scale-110 transition-transform text-green-400 contact-icon"
           >
             <Linkedin size={28} />
           </a>
           <a
-            href="#"
+            href="mailto:hilman_septiana@rocketmail.com"
             className="hover:scale-110 transition-transform text-green-400 contact-icon"
           >
             <Mail size={28} />

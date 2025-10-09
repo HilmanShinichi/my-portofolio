@@ -22,22 +22,22 @@ const ProjectsSection = () => {
 
   const projects = [
     {
-      title: "E-Commerce Platform",
+      title: "RaiseCall",
       description:
-        "A full-featured online shopping platform with payment integration and admin dashboard.",
-      tags: ["React", "Node.js", "MongoDB"],
+        "a web-based platform for human resource management and customer-agent interaction. The platform integrates modern communication channels such as Facebook, Instagram, WhatsApp, Email, and others. In addition to social media channels, it also includes non-social media features like voice call support.",
+      tags: ["Next.js", "Node.js", "MySQL","TypeScript", "Socket.io", "React.js", "NestJS"],
     },
     {
-      title: "Task Management App",
+      title: "Quiz Trivia App Telkomsel",
       description:
-        "Collaborative task management tool with real-time updates and team features.",
-      tags: ["Vue.js", "Firebase", "Tailwind"],
+        "Interactive quiz application with real-time scoring and user authentication.",
+      tags: ["Express.js", "React.js", "JavaScript","Socket.io", "MySQL", "Node.js"],
     },
     {
-      title: "Portfolio CMS",
+      title: "Admin CMS",
       description:
-        "Headless CMS for managing portfolio content with a modern admin interface.",
-      tags: ["Next.js", "Strapi", "PostgreSQL"],
+        "Content management system for managing website content with user roles.",
+      tags: ["Next.js", "React.js", "TypeScript","Storybook", "Node.js"],
     },
   ];
 

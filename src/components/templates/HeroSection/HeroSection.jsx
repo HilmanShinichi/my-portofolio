@@ -56,7 +56,7 @@ const HeroSection = ({ scrollY, scrollToSection }) => {
           <div className="text-left animate-fade-in">
             <p className="text-green-400 text-lg mb-4">Hello, It's Me</p>
             <Text variant="h1" className="mb-6 hero-title-glow text-left">
-              John Doe
+              Hilman Septiana
             </Text>
             <div className="text-2xl md:text-4xl mb-8 h-16">
               <span className="text-gray-300">And I'm a </span>
