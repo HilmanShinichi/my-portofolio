@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { ChevronDown, Github, Linkedin, Mail } from "lucide-react";
 import { Text } from "../../atoms";
+import { profile } from "../../../assets";
+
 
 const HeroSection = ({ scrollY, scrollToSection }) => {
   const [text, setText] = useState("");
@@ -99,7 +101,7 @@ const HeroSection = ({ scrollY, scrollToSection }) => {
               <div className="profile-photo-container">
                 <div className="profile-photo-placeholder">
                   <img
-                    src="/src/assets/images/profile.png"
+                    src={profile}
                     alt="Profile"
                     className="object-cover w-full h-full"
                   />
