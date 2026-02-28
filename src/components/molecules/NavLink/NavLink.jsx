@@ -2,14 +2,18 @@ const NavLink = ({ href, children, onClick, isActive = false }) => (
   <a
     href={href}
     onClick={onClick}
-    className={`text-green-400 hover:text-green-300 transition-all duration-300 font-medium nav-link-glow relative ${
-      isActive ? "text-green-300" : ""
+    className={`relative text-sm font-medium transition-all duration-300 py-1 ${
+      isActive
+        ? "text-slate-900 dark:text-white"
+        : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
     }`}
   >
     {children}
-    {isActive && (
-      <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-green-400 to-emerald-500 nav-underline"></div>
-    )}
+    <span
+      className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full transition-all duration-300 ${
+        isActive ? "w-full" : "w-0 group-hover:w-full"
+      }`}
+    />
   </a>
 );
 

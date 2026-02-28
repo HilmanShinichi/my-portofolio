@@ -32,7 +32,7 @@ const ExpertiseSection = () => {
         {
           name: "RaiseCall",
           description:
-            "I worked on the Raisecall project, a web-based platform for human resource management and customer-agent interaction. Theplatform integrates modern communication channels such as Facebook, Instagram, WhatsApp, Email, and others. In addition to social media channels, it also includes non-social media features like voice call support.",
+            "A web-based platform for human resource management and customer-agent interaction integrating modern communication channels including Facebook, Instagram, WhatsApp, Email, and voice call support.",
           technologies: [
             "React.js",
             "Node.js",
@@ -81,10 +81,10 @@ const ExpertiseSection = () => {
         "TypeScript",
         "JavaScript",
         "Nest.js",
-        "mySQL",
+        "MySQL",
         "PostgreSQL",
         "MongoDB",
-        "Git Version Control",
+        "Git",
         "Golang",
       ],
     },
@@ -125,7 +125,7 @@ const ExpertiseSection = () => {
       company: "PT Astra Honda Motor",
       type: "non-it",
       description:
-        "Key Responsibilities: Assemble motorcycle parts and components according to production procedures and work instructions. Ensure each product meets quality and safety standards before moving to the next process. Operate production tools and equipment properly and safely. Identify and report any defects, irregularities, or issues in the production line. Maintain cleanliness and orderliness in the workstation (5S implementation). Follow company safety regulations and contribute to continuous improvement activities.",
+        "Assembled motorcycle parts and components according to production procedures. Ensured product quality and safety standards while maintaining cleanliness and implementing 5S methodology.",
       skills: [
         "Assembly Line Operations",
         "Quality Inspection",
@@ -136,27 +136,41 @@ const ExpertiseSection = () => {
   ];
 
   return (
-    <section id="skills" className="py-20 bg-gray-900">
-      <div className="container mx-auto px-6">
-        <Text
-          variant="h2"
-          className={`text-center mb-16 transition-all duration-1000 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
+    <section
+      id="skills"
+      className="py-20 sm:py-28 bg-slate-50 dark:bg-slate-900/50 relative"
+    >
+      {/* Section divider */}
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-slate-200 dark:via-slate-800 to-transparent" />
+
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <div
+          className={`text-center mb-14 transition-all duration-1000 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          Professional Journey
-        </Text>
+          <p className="text-sm font-semibold uppercase tracking-widest text-indigo-500 dark:text-indigo-400 mb-3">
+            Career
+          </p>
+          <Text variant="h2" className="mb-4">
+            Professional Journey
+          </Text>
+          <p className="text-slate-500 dark:text-slate-400 max-w-lg mx-auto">
+            My career path from manufacturing to software development.
+          </p>
+        </div>
 
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-3xl mx-auto">
           {timeline.map((item, idx) => (
             <div
               key={idx}
-              className={`transition-all duration-1000 ${
+              className={`transition-all duration-700 ${
                 isVisible
-                  ? "opacity-100 translate-x-0"
-                  : "opacity-0 translate-x-20"
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-8"
               }`}
-              style={{ transitionDelay: `${idx * 200}ms` }}
+              style={{ transitionDelay: `${idx * 150}ms` }}
             >
               <TimelineItem {...item} isLast={idx === timeline.length - 1} />
             </div>

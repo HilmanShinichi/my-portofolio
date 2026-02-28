@@ -1,21 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { NavLink } from "../../molecules";
+import { ThemeToggle } from "../../atoms";
 
-const Header = ({ scrolled }) => {
+const Header = ({ scrolled, darkMode, toggleTheme }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = [
-        "home",
-        "about",
-        "projects",
-        "skills",
-        "education",
-        "contact",
-      ];
+      const sections = ["home", "projects", "skills", "education", "contact"];
       let current = "home";
 
       sections.forEach((id) => {
@@ -44,139 +38,96 @@ const Header = ({ scrolled }) => {
     setMobileMenuOpen(false);
   };
 
+  const navItems = [
+    { id: "home", label: "Home" },
+    { id: "projects", label: "Projects" },
+    { id: "skills", label: "Experience" },
+    { id: "education", label: "Education" },
+    { id: "contact", label: "Contact" },
+  ];
+
   return (
     <header
-      className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? "header-scrolled" : "bg-transparent"
+      className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-500 ${
+        scrolled
+          ? "bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800/50 shadow-sm dark:shadow-lg dark:shadow-slate-950/50"
+          : "bg-transparent"
       }`}
     >
-      <div className="w-full px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 sm:h-18">
           {/* Logo */}
-          <div className="text-xl sm:text-2xl font-bold text-green-400 logo-glow flex-shrink-0">
-            Portfolio
-          </div>
+          <a
+            href="#home"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToSection("home");
+            }}
+            className="text-lg sm:text-xl font-bold bg-gradient-to-r from-indigo-600 to-violet-600 dark:from-indigo-400 dark:to-violet-400 bg-clip-text text-transparent hover:from-indigo-500 hover:to-violet-500 transition-all duration-300 flex-shrink-0"
+          >
+            HS.
+          </a>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-4 lg:space-x-6 xl:space-x-8 flex-1 justify-center max-w-2xl">
-            <NavLink
-              href="#home"
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToSection("home");
-              }}
-              isActive={activeSection === "home"}
-            >
-              Home
-            </NavLink>
-            <NavLink
-              href="#projects"
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToSection("projects");
-              }}
-              isActive={activeSection === "projects"}
-            >
-              Projects
-            </NavLink>
-            <NavLink
-              href="#skills"
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToSection("skills");
-              }}
-              isActive={activeSection === "skills"}
-            >
-              Skills
-            </NavLink>
-            <NavLink
-              href="#education"
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToSection("education");
-              }}
-              isActive={activeSection === "education"}
-            >
-              Education
-            </NavLink>
-            <NavLink
-              href="#contact"
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToSection("contact");
-              }}
-              isActive={activeSection === "contact"}
-            >
-              Contact
-            </NavLink>
+          <nav className="hidden md:flex items-center gap-1 lg:gap-2">
+            {navItems.map((item) => (
+              <div key={item.id} className="px-3 py-1">
+                <NavLink
+                  href={`#${item.id}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection(item.id);
+                  }}
+                  isActive={activeSection === item.id}
+                >
+                  {item.label}
+                </NavLink>
+              </div>
+            ))}
           </nav>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden text-green-400 hover:text-green-300 transition-colors flex-shrink-0"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Right side: Theme Toggle + Mobile Menu */}
+          <div className="flex items-center gap-2">
+            <ThemeToggle darkMode={darkMode} toggleTheme={toggleTheme} />
+
+            <button
+              className="md:hidden p-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-all duration-300"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
-        {mobileMenuOpen && (
-          <div className="md:hidden absolute top-16 left-0 right-0 w-full bg-black border-t border-green-500 border-opacity-30 shadow-lg z-40">
-            <nav className="flex flex-col space-y-3 p-4">
-              <NavLink
-                href="#home"
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection("home");
-                }}
-                isActive={activeSection === "home"}
-              >
-                Home
-              </NavLink>
-              <NavLink
-                href="#education"
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection("education");
-                }}
-                isActive={activeSection === "education"}
-              >
-                Education
-              </NavLink>
-              <NavLink
-                href="#projects"
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection("projects");
-                }}
-                isActive={activeSection === "projects"}
-              >
-                Projects
-              </NavLink>
-              <NavLink
-                href="#skills"
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection("skills");
-                }}
-                isActive={activeSection === "skills"}
-              >
-                Skills
-              </NavLink>
-              <NavLink
-                href="#contact"
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection("contact");
-                }}
-                isActive={activeSection === "contact"}
-              >
-                Contact
-              </NavLink>
-            </nav>
-          </div>
-        )}
+        <div
+          className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+            mobileMenuOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
+          }`}
+        >
+          <nav className="py-4 border-t border-slate-200 dark:border-slate-800/50">
+            <div className="flex flex-col gap-1">
+              {navItems.map((item) => (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection(item.id);
+                  }}
+                  className={`px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 ${
+                    activeSection === item.id
+                      ? "bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
+                      : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/50"
+                  }`}
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
+          </nav>
+        </div>
       </div>
     </header>
   );

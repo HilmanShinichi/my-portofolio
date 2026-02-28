@@ -1,12 +1,30 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portfolio Hilman Septiana</title>
-    <link rel="icon" type="image/x-icon" href="/src/assets/icons/favicon.svg">
+    <meta
+      name="description"
+      content="Hilman Septiana - Full-Stack Developer Portfolio"
+    />
+    <title>Hilman Septiana | Full-Stack Developer</title>
+    <link rel="icon" type="image/x-icon" href="/src/assets/icons/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   </head>
-  <body>
+  <body class="bg-slate-50 dark:bg-slate-950">
+    <script>
+      // Prevent flash of wrong theme
+      (function () {
+        const theme = localStorage.getItem("theme");
+        if (
+          theme === "dark" ||
+          (!theme && window.matchMedia("(prefers-color-scheme: dark)").matches)
+        ) {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
