@@ -24,45 +24,65 @@ const ProjectsSection = () => {
     {
       title: "RaiseCall",
       description:
-        "a web-based platform for human resource management and customer-agent interaction. The platform integrates modern communication channels such as Facebook, Instagram, WhatsApp, Email, and others. In addition to social media channels, it also includes non-social media features like voice call support.",
-      tags: ["Next.js", "Node.js", "MySQL","TypeScript", "Socket.io", "React.js", "NestJS"],
+        "A web-based platform for human resource management and customer-agent interaction. Integrates communication channels like Facebook, Instagram, WhatsApp, Email with voice call support.",
+      tags: [
+        "Next.js",
+        "Node.js",
+        "MySQL",
+        "TypeScript",
+        "Socket.io",
+        "NestJS",
+      ],
     },
     {
-      title: "Quiz Trivia App Telkomsel",
+      title: "Quiz Trivia App",
       description:
-        "Interactive quiz application with real-time scoring and user authentication.",
-      tags: ["Express.js", "React.js", "JavaScript","Socket.io", "MySQL", "Node.js"],
+        "Interactive quiz application for Telkomsel with real-time scoring, live leaderboards, and user authentication system.",
+      tags: ["Express.js", "React.js", "JavaScript", "Socket.io", "MySQL"],
     },
     {
       title: "Admin CMS",
       description:
-        "Content management system for managing website content with user roles.",
-      tags: ["Next.js", "React.js", "TypeScript","Storybook", "Node.js"],
+        "Content management system for managing website content with role-based access control and component library documentation.",
+      tags: ["Next.js", "React.js", "TypeScript", "Storybook", "Node.js"],
     },
   ];
 
   return (
-    <section id="projects" className="py-20 bg-black">
-      <div className="container mx-auto px-6">
-        <Text
-          variant="h2"
-          className={`text-center mb-12 transition-all duration-1000 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
+    <section
+      id="projects"
+      className="py-20 sm:py-28 bg-white dark:bg-slate-950 relative"
+    >
+      {/* Section background accent */}
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-slate-200 dark:via-slate-800 to-transparent" />
+
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <div
+          className={`text-center mb-14 transition-all duration-1000 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          Featured Projects
-        </Text>
+          <p className="text-sm font-semibold uppercase tracking-widest text-indigo-500 dark:text-indigo-400 mb-3"></p>
+          <Text variant="h2" className="mb-4">
+            Featured Projects
+          </Text>
+          <p className="text-slate-500 dark:text-slate-400 max-w-lg mx-auto">
+            A selection of projects I've worked on, showcasing my experience
+            with modern web technologies.
+          </p>
+        </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {projects.map((project, idx) => (
             <div
               key={idx}
-              className={`transition-all duration-1000 ${
+              className={`transition-all duration-700 ${
                 isVisible
                   ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-20"
+                  : "opacity-0 translate-y-12"
               }`}
-              style={{ transitionDelay: `${idx * 200}ms` }}
+              style={{ transitionDelay: `${idx * 150}ms` }}
             >
               <ProjectCard {...project} />
             </div>
